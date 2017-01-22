@@ -15,7 +15,7 @@ public class Viryme implements ApplicationListener {
 	public void create() {
 
 
-		game = new Game(4, 300, 300);
+		game = new Game(4, 300, 200);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class Game {
             Sound music = Gdx.audio.newSound(Gdx.files.internal("core/assets/game/eos/music.mp3"));
             music.play();
 
-            this.background = new Texture(Gdx.files.internal("core/assets/game/eos/bg.jpg"));
+            this.background = new Texture(Gdx.files.internal("core/assets/game/eos/EOS.png"));
             this.texture = new Texture(Gdx.files.internal("core/assets/game/note.png"));
             int width = texture.getWidth();
             float fHeight = ((float) columnWidth / (float) texture.getWidth()) * (float) texture.getHeight();
