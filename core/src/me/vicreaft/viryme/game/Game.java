@@ -3,30 +3,38 @@ package me.vicreaft.viryme.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
+    private SpriteBatch batch;
     private List<Column> columns = new ArrayList<Column>();
     private Texture texture;
-
-    public Game(int numberOfColumns, int columnLeftX){
+    private Texture background;
+    public Game(int numberOfColumns, int columnLeftX, int columnWidth){
+        batch = new SpriteBatch();
 
         if(!(numberOfColumns >= 1)){
             System.out.println("One minimum column is needed to play");
         }else{
 
-            this.texture = new Texture(Gdx.files.internal("core/assets/game/barre.png"));
-            int width = texture.getWidth();
-            int height = texture.getHeight();
+            Sound music = Gdx.audio.newSound(Gdx.files.internal("core/assets/game/eos/music.mp3"));
+            music.play();
 
-            columns.add(new Column(columnLeftX, 666, width, height, texture));
+            this.background = new Texture(Gdx.files.internal("core/assets/game/eos/bg.jpg"));
+            this.texture = new Texture(Gdx.files.internal("core/assets/game/note.png"));
+            int width = texture.getWidth();
+            float fHeight = ((float) columnWidth / (float) texture.getWidth()) * (float) texture.getHeight();
+
+            columns.add(new Column(columnLeftX, 1000, columnWidth, (int) fHeight, texture));
 
             for(int i = 1; i < numberOfColumns; i++) {
-                columns.add(new Column(columnLeftX + width * i, 666, width, height, texture));
+                columns.add(new Column(columnLeftX + columnWidth * i, 1000, columnWidth, (int) fHeight, texture));
             }
         }
 
@@ -34,6 +42,10 @@ public class Game {
     }
 
     public void render(){
+
+        batch.begin();
+        batch.draw(background, 0, 0);
+        batch.end();
 
         //if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) column1.addNote();
         //if(Gdx.input.isKeyJustPressed(Input.Keys.D)) column2.addNote();

@@ -3,6 +3,7 @@ package me.vicreaft.viryme.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import me.vicreaft.viryme.Viryme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Column {
 
     private int x;
-    private int y;
+    private int columnHeight;
     private int noteWidth;
     private int noteHeight;
     private SpriteBatch batch;
@@ -18,15 +19,16 @@ public class Column {
     public List<Note> notes = new ArrayList<Note>();
 
 
-    public Column(int x, int y, int noteWidth, int noteHeight, Texture texture){
+    public Column(int x, int columnHeight, int noteWidth, int noteHeight, Texture texture){
         this.x = x;
-        this.y = y;
+        this.columnHeight = columnHeight;
         this.noteWidth = noteWidth;
+        this.noteHeight = noteHeight;
         this.noteHeight = noteHeight;
         this.texture = texture;
         batch = new SpriteBatch();
 
-        notes.add(new Note(x, 1000, 256, 82, texture));
+        notes.add(new Note(x, columnHeight, noteWidth, noteHeight, texture));
 
     }
 
@@ -44,7 +46,7 @@ public class Column {
 
     public void addNote(){
 
-        notes.add(new Note(x, 1000, noteWidth, noteHeight, texture));
+        notes.add(new Note(x, 1336, noteWidth, noteHeight, texture));
 
     }
 }
