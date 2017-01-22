@@ -14,12 +14,11 @@ import me.vicreaft.viryme.game.Note;
 public class Viryme implements ApplicationListener {
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private Note note;
 	private Game game;
 
 	@Override
 	public void create() {
-		game = new Game(1);
+		game = new Game(4, 300);
 	}
 
 	@Override
