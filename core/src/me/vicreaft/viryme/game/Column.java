@@ -28,7 +28,7 @@ public class Column {
         this.texture = texture;
         batch = new SpriteBatch();
 
-        notes.add(new Note(x, columnHeight, noteWidth, noteHeight, texture));
+        //notes.add(new Note(x, columnHeight, noteWidth, noteHeight, texture));
 
     }
 

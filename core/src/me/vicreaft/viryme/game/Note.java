@@ -32,7 +32,7 @@ public class Note {
 
     public void update(float delta){
 
-        if(this.bound.y <= 0) this.bound.y = initialY;
+        //if(this.bound.y <= 0) this.bound.y = initialY;
         bound.y -= weight*delta;
     }
 

@@ -6,18 +6,22 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import me.vicreaft.viryme.OsuReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-
+    private int temp;
     private SpriteBatch batch;
     private List<Column> columns = new ArrayList<Column>();
     private Texture texture;
     private Texture background;
+    private OsuReader osureader;
     public Game(int numberOfColumns, int columnLeftX, int columnWidth){
         batch = new SpriteBatch();
+        temp = 0;
+        osureader = new OsuReader();
 
         if(!(numberOfColumns >= 1)){
             System.out.println("One minimum column is needed to play");
@@ -54,7 +58,12 @@ public class Game {
             e.render(1);
         });
 
-
+        if(temp == 10){
+            temp = 0;
+            columns.get(osureader.getNextNote()).addNote();
+        }else{
+            temp++;
+        }
 
     }
 }
