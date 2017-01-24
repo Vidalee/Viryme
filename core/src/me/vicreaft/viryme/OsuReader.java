@@ -1,7 +1,6 @@
 package me.vicreaft.viryme;
 
 
-import com.badlogic.gdx.Gdx;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

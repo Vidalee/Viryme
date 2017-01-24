@@ -34,7 +34,6 @@ public class Game {
             this.texture = new Texture(Gdx.files.internal("core/assets/game/note.png"));
             int width = texture.getWidth();
             float fHeight = ((float) columnWidth / (float) texture.getWidth()) * (float) texture.getHeight();
-
             columns.add(new Column(columnLeftX, 1000, columnWidth, (int) fHeight, texture));
 
             for(int i = 1; i < numberOfColumns; i++) {
