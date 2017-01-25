@@ -10,43 +10,47 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OsuReader {
+
+
+
     private static HashMap<Integer, Integer> notes = new HashMap<Integer, Integer>();
     private static List<Integer> notesTime = new ArrayList<Integer>();
     private static int index;
-    public OsuReader() {
-        index = 0;
 
 
-        String osuFile = "/root/Desktop/Viryme/core/assets/game/eos/ginkiha - EOS -INFINITE EDIT- (MeowPaz) [Pharos' ADVANCED].osu";
-        System.out.println(osuFile);
-        String line = "";
-        String splitWith = ",";
-        boolean passed = false;
-        try (BufferedReader br = new BufferedReader(new FileReader(osuFile))) {
+    public OsuReader(String path) {
+            index = 0;
 
-            while ((line = br.readLine()) != null) {
 
-                // use comma as separator
-                String[] data = line.split(splitWith);
+            String osuFile = path;
+            System.out.println(osuFile);
+            String line = "";
+            String splitWith = ",";
+            boolean passed = false;
+            try (BufferedReader br = new BufferedReader(new FileReader(osuFile))) {
 
-                if(passed){
+                while ((line = br.readLine()) != null) {
 
-                    notes.put(Integer.parseInt(data[2]), getColumn(Integer.parseInt(data[0]), 4));
-                    notesTime.add(Integer.parseInt(data[2]));
+                    // use comma as separator
+                    String[] data = line.split(splitWith);
+
+                    if (passed) {
+
+                        notes.put(Integer.parseInt(data[2]), getColumn(Integer.parseInt(data[0]), 4));
+                        notesTime.add(Integer.parseInt(data[2]));
+                    }
+
+                    if (data[0].equalsIgnoreCase("[HitObjects]")) passed = true;
+
+
                 }
-
-                if(data[0].equalsIgnoreCase("[HitObjects]")) passed = true;
-
-
-
+                System.out.println(notes.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            System.out.println(notes.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
-
-    }
 
     public static void main(String[] args) {
 
@@ -57,7 +61,7 @@ public class OsuReader {
     public int getNextNote(){
         int i = index;
         index++;
-        System.out.println("Note " + i + " sur " + notesTime.size());
+      //  System.out.println("Note " + i + " sur " + notesTime.size());
         return notes.get(notesTime.get(i));
     }
     private static int getColumn(int key, int maxKey){
@@ -68,5 +72,13 @@ public class OsuReader {
         else return key;
 
 
+    }
+
+    public HashMap<Integer, Integer> getNotesData(){
+        return notes;
+    }
+
+    public List<Integer> getNotesTime() {
+        return notesTime;
     }
 }
