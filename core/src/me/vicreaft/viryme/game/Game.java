@@ -20,7 +20,9 @@ public class Game {
     private Texture background;
     private Map map;
     private OsuReader osureader;
+    private int numberOfNotesRendered;
     public Game(int numberOfColumns, int columnLeftX, int columnWidth){
+        numberOfNotesRendered = 0;
         batch = new SpriteBatch();
         //osureader = new OsuReader("/root/Desktop/Viryme/core/assets/game/eos/ginkiha - EOS -INFINITE EDIT- (MeowPaz) [Pharos' ADVANCED].osu");
         temp = 0;
@@ -78,8 +80,8 @@ public class Game {
             //Create the note following the Map's instructions
             columns.get(result[0]).addNote(result[1]);
 
-
-            System.out.println(columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size());
+            numberOfNotesRendered = columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size();
+            System.out.println("Notes rendered atm : " + numberOfNotesRendered);
         }else{
             temp++;
         }
