@@ -15,16 +15,14 @@ import java.util.List;
 public class Game {
     private int temp;
     private SpriteBatch batch;
-    private List<Column> columns = new ArrayList<Column>();
+    private List<Column> columns = new ArrayList<>();
     private Texture texture;
     private Texture background;
     private Map map;
-    private OsuReader osureader;
     private int numberOfNotesRendered;
     public Game(int numberOfColumns, int columnLeftX, int columnWidth){
         numberOfNotesRendered = 0;
         batch = new SpriteBatch();
-        //osureader = new OsuReader("/root/Desktop/Viryme/core/assets/game/eos/ginkiha - EOS -INFINITE EDIT- (MeowPaz) [Pharos' ADVANCED].osu");
         temp = 0;
         map = new Map();
         map.loadOsuFile("blabla");
@@ -45,9 +43,8 @@ public class Game {
                 columns.add(new Column(columnLeftX + columnWidth * i, 1000, columnWidth, (int) fHeight, i,texture));
             }
 
-            for(int i = 0; i < columns.size(); i++){
-                Viryme.fe.addListener(columns.get(i));
-            }
+            columns.forEach((e) -> Viryme.fe.addListener(e));
+
         }
 
 
