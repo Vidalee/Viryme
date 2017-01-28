@@ -13,7 +13,7 @@ public class Note {
     private Texture texture;
     private int width;
     private int height;
-    private float weight = 15; //La gravité ahah
+    private float weight = 30; //La gravité ahah
     private int initialY;
     private int columnNumber;
     private int keyTime;
@@ -28,6 +28,7 @@ public class Note {
         bound = new Rectangle(x,y,width,height);
         initialY = y;
 
+
     }
 
     public void draw(SpriteBatch spriteBatch){
@@ -36,15 +37,20 @@ public class Note {
         spriteBatch.draw(texture, bound.x, bound.y, width, height);
     }
 
-    public void update(float delta){
+    public void update(float delta, float musicPosition){
+        bound.y = (int) ((((musicPosition * 1000) - keyTime) * -1) * (weight / 20 * delta));
+
+       // bound.y = (int) fY;
+        bound.y -= weight*delta;
+
+
 
         //if(this.bound.y <= 0) this.bound.y = initialY;
-        if(this.bound.y <= 0 && this.bound.y > -20){
+        if(this.bound.y <= 0){
             destruct();
             //Viryme.fe.noteDestruct(this, columnNumber);
         }
 
-        bound.y -= weight*delta;
     }
 
     private void destruct(){
@@ -60,5 +66,11 @@ public class Note {
         return texture;
     }
 
+    public int getY() {
+        return bound.y;
+    }
 
+    public int getKeyTime() {
+        return keyTime;
+    }
 }

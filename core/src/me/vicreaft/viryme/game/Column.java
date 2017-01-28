@@ -38,7 +38,7 @@ public class Column implements VirymeListener{
 
     }
 
-    public void render(float delta) {
+    public void render(float delta, float musicPosition) {
 
         batch.begin();
 
@@ -47,12 +47,16 @@ public class Column implements VirymeListener{
         */
         notes.removeIf(e -> !e.active);
         notes.forEach((e) -> {
-                e.update(delta);
+                e.update(delta, musicPosition);
                 e.draw(batch);
 
         });
 
         batch.end();
+
+        if(notes.size() >= 1) {
+            //System.out.println(notes.get(0).getY() + " | " + musicPosition * 1000 + " | " + notes.get(0).getKeyTime());
+        }
     }
 
     public void addNote(int keyTime) {

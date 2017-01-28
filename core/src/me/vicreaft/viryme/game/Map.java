@@ -16,15 +16,20 @@ public class Map {
     }
 
     public void loadOsuFile(String osuFile){
-        OsuReader osureader = new OsuReader("/root/Desktop/Viryme/core/assets/game/eos/ginkiha - EOS -INFINITE EDIT- (MeowPaz) [Pharos' ADVANCED].osu");
+        OsuReader osureader = new OsuReader("/root/Desktop/Viryme/core/assets/game/eos/ginkiha - EOS -INFINITE EDIT- (MeowPaz) [S.Demon's INFINITE].osu");
         notesData = osureader.getNotesData();
         notesTime = osureader.getNotesTime();
     }
 
-    public int[] getNextNote(){
+    public int[] getNextNote() {
         int i = index;
         index++;
+
         System.out.println("Note " + i + " sur " + notesTime.size());
-        return new int[] {notesData.get(notesTime.get(i)), notesTime.get(i)};
+        if (i + 1 > notesTime.size()) {
+            return new int[]{-1, 666};
+        } else {
+            return new int[]{notesData.get(notesTime.get(i)), notesTime.get(i)};
+        }
     }
 }

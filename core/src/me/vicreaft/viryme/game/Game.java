@@ -3,6 +3,7 @@ package me.vicreaft.viryme.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,6 +22,9 @@ public class Game {
     private Map map;
     private int numberOfNotesRendered;
 
+    private Music music;
+    private float musicPosition = 0;
+
     public Game(int numberOfColumns, int columnLeftX, int columnWidth){
         numberOfNotesRendered = 0;
         batch = new SpriteBatch();
@@ -31,7 +35,7 @@ public class Game {
             System.out.println("One minimum column is needed to play");
         }else{
 
-            Sound music = Gdx.audio.newSound(Gdx.files.internal("core/assets/game/eos/music.mp3"));
+            music = Gdx.audio.newMusic(Gdx.files.internal("core/assets/game/eos/music.mp3"));
             music.play();
 
             this.background = new Texture(Gdx.files.internal("core/assets/game/eos/bg.jpg"));
@@ -51,8 +55,8 @@ public class Game {
 
     }
 
-    public void render(){
-
+    public void render() {
+        musicPosition = music.getPosition();
         batch.begin();
         batch.draw(background, 0, 0);
         batch.end();
@@ -60,11 +64,11 @@ public class Game {
         //if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) column1.addNote();
         //if(Gdx.input.isKeyJustPressed(Input.Keys.D)) column2.addNote();
 
-        columns.forEach((e) ->{
-            e.render(1);
+        columns.forEach((e) -> {
+            e.render(1, musicPosition);
         });
 
-        if(temp == 10){
+        if (temp == 1) {
             //System.out.println(Gdx.graphics.getFramesPerSecond());
 
             temp = 0;
@@ -75,14 +79,20 @@ public class Game {
              */
             int[] result = map.getNextNote();
 
-            //Create the note following the Map's instructions
-            columns.get(result[0]).addNote(result[1]);
+            //If result [0] = -1; then we reached the maximum of note. It should not happen, but it's a security to not make the game crash.
 
-            numberOfNotesRendered = columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size();
-            System.out.println("Notes rendered atm : " + numberOfNotesRendered);
-        }else{
-            temp++;
-        }
+            if (result[0] != -1) {
+                //Create the note following the Map's instructions
+                columns.get(result[0]).addNote(result[1]);
+
+                numberOfNotesRendered = columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size();
+                System.out.println("Notes rendered atm : " + numberOfNotesRendered);
+            }
+            } else {
+                temp++;
+
+
+    }
 
     }
 }
