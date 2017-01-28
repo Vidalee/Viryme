@@ -20,6 +20,7 @@ public class Game {
     private Texture background;
     private Map map;
     private int numberOfNotesRendered;
+
     public Game(int numberOfColumns, int columnLeftX, int columnWidth){
         numberOfNotesRendered = 0;
         batch = new SpriteBatch();

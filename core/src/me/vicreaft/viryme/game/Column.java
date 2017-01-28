@@ -18,6 +18,8 @@ public class Column implements VirymeListener{
     private SpriteBatch batch;
     private Texture texture;
     public List<Note> notes = new ArrayList<Note>();
+    List<Note> tempNotes = new ArrayList<>();
+
     private Iterator<Note> iterator = notes.iterator();
 
 
@@ -41,28 +43,14 @@ public class Column implements VirymeListener{
         batch.begin();
 
         /*
-        I don't use a forEach() here since a note may be removed from the list causing a ConcurrentModificationException.
-
-
-        while(iterator.hasNext()){
-            Note e = iterator.next();
-            if(e.active) {
+        I don't use a forEach() here since a note may be removed from the list, causing a ConcurrentModificationException.
+        */
+        notes.removeIf(e -> !e.active);
+        notes.forEach((e) -> {
                 e.update(delta);
                 e.draw(batch);
-            }else{
-                iterator.remove();
-            }
-        }*/
-        List<Note> tempNotes = notes;
-        tempNotes.forEach((e) -> {
-            if(e.active) {
-                e.update(delta);
-                e.draw(batch);
-            }else{
-                tempNotes.remove(e);
-            }
+
         });
-        notes = tempNotes;
 
         batch.end();
     }
