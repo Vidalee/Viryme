@@ -70,7 +70,6 @@ public class Game {
         });
 
         if (temp == 5) {
-            //System.out.println(Gdx.graphics.getFramesPerSecond());
 
             temp = 0;
 
