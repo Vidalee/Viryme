@@ -21,11 +21,12 @@ public class Game {
     private Texture background;
     private Map map;
     private int numberOfNotesRendered;
-
+    private int fallingDirection;
     private Music music;
     private float musicPosition = 0;
 
-    public Game(int numberOfColumns, int columnLeftX, int columnWidth){
+    public Game(int numberOfColumns, int columnLeftX, int columnWidth, int fallingDirection){
+        this.fallingDirection = fallingDirection;
         numberOfNotesRendered = 0;
         batch = new SpriteBatch();
         temp = 0;
@@ -42,10 +43,10 @@ public class Game {
             this.texture = new Texture(Gdx.files.internal("core/assets/game/note.png"));
             int width = texture.getWidth();
             float fHeight = ((float) columnWidth / (float) texture.getWidth()) * (float) texture.getHeight();
-            columns.add(new Column(columnLeftX, 1000, columnWidth, (int) fHeight, 1, texture));
+            columns.add(new Column(columnLeftX, 1000, columnWidth, (int) fHeight, 1, fallingDirection, texture));
 
             for(int i = 1; i < numberOfColumns; i++) {
-                columns.add(new Column(columnLeftX + columnWidth * i, 1000, columnWidth, (int) fHeight, i,texture));
+                columns.add(new Column(columnLeftX + columnWidth * i, 1000, columnWidth, (int) fHeight, i, fallingDirection, texture));
             }
 
             columns.forEach((e) -> Viryme.fe.addListener(e));
@@ -68,7 +69,7 @@ public class Game {
             e.render(1, musicPosition);
         });
 
-        if (temp == 1) {
+        if (temp == 5) {
             //System.out.println(Gdx.graphics.getFramesPerSecond());
 
             temp = 0;
@@ -81,14 +82,18 @@ public class Game {
 
             //If result [0] = -1; then we reached the maximum of note. It should not happen, but it's a security to not make the game crash.
 
+
             if (result[0] != -1) {
                 //Create the note following the Map's instructions
                 columns.get(result[0]).addNote(result[1]);
 
-                numberOfNotesRendered = columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size();
-                System.out.println("Notes rendered atm : " + numberOfNotesRendered);
+
             }
-            } else {
+            numberOfNotesRendered = columns.get(0).notes.size() + columns.get(1).notes.size() + columns.get(2).notes.size() + columns.get(3).notes.size();
+
+            System.out.println("Notes rendered atm : " + numberOfNotesRendered + " | FPS: " + Gdx.graphics.getFramesPerSecond());
+
+        } else {
                 temp++;
 
 

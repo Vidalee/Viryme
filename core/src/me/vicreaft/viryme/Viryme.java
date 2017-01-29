@@ -17,7 +17,7 @@ public class Viryme implements ApplicationListener {
 	    fe = new FireEvents();
 
         //Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-		game = new Game(4, 300, 200);
+		game = new Game(4, 300, 200, 1);
 		fps = new FPSLogger();
 
 	}

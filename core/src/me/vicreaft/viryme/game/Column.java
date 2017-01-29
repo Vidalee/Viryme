@@ -16,6 +16,7 @@ public class Column implements VirymeListener{
     private int noteWidth;
     private int noteHeight;
     private SpriteBatch batch;
+    private int fallingDirection;
     private Texture texture;
     public List<Note> notes = new ArrayList<Note>();
     List<Note> tempNotes = new ArrayList<>();
@@ -24,7 +25,8 @@ public class Column implements VirymeListener{
 
 
 
-    public Column(int x, int columnHeight, int noteWidth, int noteHeight, int columnNumber, Texture texture) {
+    public Column(int x, int columnHeight, int noteWidth, int noteHeight, int columnNumber, int fallingDirection, Texture texture) {
+        this.fallingDirection = fallingDirection;
         this.columnNumber = columnNumber;
         this.x = x;
         this.columnHeight = columnHeight;
@@ -55,13 +57,13 @@ public class Column implements VirymeListener{
         batch.end();
 
         if(notes.size() >= 1) {
-            //System.out.println(notes.get(0).getY() + " | " + musicPosition * 1000 + " | " + notes.get(0).getKeyTime());
+//            System.out.println(notes.get(0).getY() + " | " + musicPosition * 1000 + " | " + notes.get(0).getKeyTime());
         }
     }
 
     public void addNote(int keyTime) {
 
-        notes.add(new Note(x, 1336, noteWidth, noteHeight, keyTime, columnNumber, texture));
+        notes.add(new Note(x, 1336, noteWidth, noteHeight, keyTime, columnNumber, fallingDirection, texture));
 
     }
 

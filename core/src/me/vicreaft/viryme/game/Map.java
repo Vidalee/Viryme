@@ -25,7 +25,7 @@ public class Map {
         int i = index;
         index++;
 
-        System.out.println("Note " + i + " sur " + notesTime.size());
+        //System.out.println("Note " + i + " sur " + notesTime.size());
         if (i + 1 > notesTime.size()) {
             return new int[]{-1, 666};
         } else {
