@@ -1,1 +1,1 @@
-Un projet de jeu de rythme, pour train libgdx.
+Un projet de jeu de rythme, pour train libgdx.À la osu!mania / stepmania like
