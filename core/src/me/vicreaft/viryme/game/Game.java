@@ -2,12 +2,9 @@ package me.vicreaft.viryme.game;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import me.vicreaft.viryme.OsuReader;
 import me.vicreaft.viryme.Viryme;
 
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ public class Game {
         temp = 0;
         map = new Map();
         map.loadOsuFile("blabla");
-        if(!(numberOfColumns >= 1)){
+        if(numberOfColumns < 1){
             System.out.println("One minimum column is needed to play");
         }else{
 
