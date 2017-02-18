@@ -4,5 +4,4 @@ addons:
     packages:
       - oracle-java8-installer
       - oracle-java8-set-default
-jdk:
-  - oraclejdk8
+jdk: oraclejdk8 
