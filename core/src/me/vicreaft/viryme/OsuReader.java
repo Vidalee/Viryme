@@ -51,13 +51,6 @@ public class OsuReader {
 
         }
 
-
-    public static void main(String[] args) {
-
-
-
-    }
-
     public int getNextNote(){
         int i = index;
         index++;
