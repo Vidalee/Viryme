@@ -19,7 +19,7 @@ public class Column implements VirymeListener{
     private int fallingDirection;
     private Texture texture;
     public List<Note> notes = new ArrayList<Note>();
-    List<Note> tempNotes = new ArrayList<>();
+    private List<Note> tempNotes = new ArrayList<>();
 
     private Iterator<Note> iterator = notes.iterator();
 
