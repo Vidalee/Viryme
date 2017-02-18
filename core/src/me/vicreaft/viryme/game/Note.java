@@ -3,8 +3,6 @@ package me.vicreaft.viryme.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import me.vicreaft.viryme.Viryme;
-
 import java.awt.*;
 
 public class Note {
